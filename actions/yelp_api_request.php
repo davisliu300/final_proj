@@ -41,7 +41,7 @@ $DEFAULT_TERM = 'dinner';
 
 
 if ($input_fromUser == null){
-$DEFAULT_LOCATION  = 'san diego, ca';
+$DEFAULT_LOCATION  = 'mesa, az';
 }else {
 $DEFAULT_LOCATION = $input_fromUser;
 }
