@@ -33,7 +33,7 @@ $input_fromUser = null;
 require_once ('input_temp.php');
 
 // echo "i am here after reqired once ";
-// echo $input_fromUser;
+ echo $input_fromUser;
 
 
 $DEFAULT_TERM = 'dinner';
@@ -41,7 +41,7 @@ $DEFAULT_TERM = 'dinner';
 
 
 if ($input_fromUser == null){
-$DEFAULT_LOCATION  = 'mesa, az';
+$DEFAULT_LOCATION  = 'san diego, ca';
 }else {
 $DEFAULT_LOCATION = $input_fromUser;
 }
@@ -126,6 +126,7 @@ function get_business($business_id) {
 function query_api($term, $location) {     
     $response = json_decode(search($term, $location));
     $business_id = $response->businesses[0]->id;
+
 //       print "businesses:<pre>".print_r($response,true)."</pre>\n";
 
     print sprintf(
@@ -135,19 +136,28 @@ function query_api($term, $location) {
     );
     
     $response = get_business($business_id);
+	
+	$response = json_decode($response, true); //decode JSON once again from business - DL
+
+//	var_dump($response);
+//	echo $response['snippet_image_url'];
+
+	echo "<img src = $response[snippet_image_url] >";
+?>
+
+
+<?php
+	 //return $response;
     
 //    print sprintf("Result >>>>>>>>>>>>> for business \"%s\" found:\n", $business_id);
-	//print "<pre>$response</pre>\n";
 //    print "1 business:<pre>".print_r($response)."</pre>\n";
 }
 /**
  * User input is handled here 
  */
 $longopts  = array(
-    /*
 	"term:: ",
     "location:: ",
-	*/
 );
    
 $options = getopt("", $longopts);
