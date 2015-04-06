@@ -28,12 +28,17 @@ $TOKEN = 'KoXIbe2lso3bifg1NuByim7VwRbIxptJ';
 $TOKEN_SECRET = 'gSQdI4sXuo77ltfjGf8WfBNI8sE';
 $API_HOST = 'api.yelp.com';
 
+
+$SEARCH_LIMIT = 9;
+$SEARCH_PATH = '/v2/search/';
+$BUSINESS_PATH = '/v2/business/';
+
 $input_fromUser = null;
 
 require_once ('input_temp.php');
 
 // echo "i am here after reqired once ";
- echo $input_fromUser;
+echo "$input_fromUser 's $SEARCH_LIMIT restaurant are: <br>";
 
 
 $DEFAULT_TERM = 'dinner';
@@ -41,15 +46,13 @@ $DEFAULT_TERM = 'dinner';
 
 
 if ($input_fromUser == null){
-$DEFAULT_LOCATION  = 'san diego, ca';
+	$DEFAULT_LOCATION  = 'san diego, ca';
 }else {
-$DEFAULT_LOCATION = $input_fromUser;
+	$DEFAULT_LOCATION = $input_fromUser;
 }
 
 
-$SEARCH_LIMIT = 3;
-$SEARCH_PATH = '/v2/search/';
-$BUSINESS_PATH = '/v2/business/';
+
 /** 
  * Makes a request to the Yelp API and returns the response
  * 
@@ -83,8 +86,7 @@ function request($host, $path) {
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
     curl_setopt($ch, CURLOPT_HEADER, 0);
     $data = curl_exec($ch);
-    curl_close($ch);
-    
+    curl_close($ch);    
     return $data;
 }
 /**
@@ -95,15 +97,13 @@ function request($host, $path) {
  * @return   The JSON response from the request 
  */
 function search($term, $location) {
-    $url_params = array();
-    
+    $url_params = array();    
     $url_params['term'] = $term ?: $GLOBALS['DEFAULT_TERM'];
     $url_params['location'] = $location?: $GLOBALS['DEFAULT_LOCATION'];
     $url_params['limit'] = $GLOBALS['SEARCH_LIMIT'];
     $search_path = $GLOBALS['SEARCH_PATH'] . "?" . http_build_query($url_params);
 
     return request($GLOBALS['API_HOST'], $search_path);
-
 }
 
 /**
@@ -113,8 +113,7 @@ function search($term, $location) {
  * @return   The JSON response from the request 
  */
 function get_business($business_id) {
-    $business_path = $GLOBALS['BUSINESS_PATH'] . $business_id;
-    
+    $business_path = $GLOBALS['BUSINESS_PATH'] . $business_id;    
     return request($GLOBALS['API_HOST'], $business_path);
 }
 /**
@@ -124,30 +123,67 @@ function get_business($business_id) {
  * @param    $location    The location of the business to query
  */
 function query_api($term, $location) {     
-    $response = json_decode(search($term, $location));
-    $business_id = $response->businesses[0]->id;
+    $response = json_decode(search($term, $location));	
+
+		$business_id = $response->businesses[0]->id; //changing the index on showing business - D
+		$business_id1 = $response->businesses[1]->id;
+		$business_id2 = $response->businesses[2]->id;
+		$business_id3 = $response->businesses[3]->id;
+		$business_id4 = $response->businesses[4]->id;
+		$business_id5 = $response->businesses[5]->id;
+		$business_id6 = $response->businesses[6]->id;
+		$business_id7 = $response->businesses[7]->id;
+		$business_id8 = $response->businesses[8]->id;		
 
 //       print "businesses:<pre>".print_r($response,true)."</pre>\n";
-
+/*
     print sprintf(
         "%d businesses found, querying business info for the top result \"%s\"\n\n",         
         count($response->businesses),
         $business_id
     );
-    
-    $response = get_business($business_id);
-	
+*/  
+    $response = get_business($business_id);	
 	$response = json_decode($response, true); //decode JSON once again from business - DL
 
+	$response1 = get_business($business_id1);	
+	$response1 = json_decode($response1, true);
+	
+	$response2 = get_business($business_id2);
+	$response2 = json_decode($response2, true);
+	
+	$response3 = get_business($business_id3);	
+	$response3 = json_decode($response3, true);
+	
+	$response4 = get_business($business_id4);
+	$response4 = json_decode($response4, true);
+
+	$response5 = get_business($business_id5);	
+	$response5 = json_decode($response5, true);
+	
+	$response6 = get_business($business_id6);	
+	$response6 = json_decode($response6, true);
+
+	$response7 = get_business($business_id7);	
+	$response7 = json_decode($response7, true);
+	
+	$response8 = get_business($business_id8);	
+	$response8 = json_decode($response8, true);	
+	
 //	var_dump($response);
 //	echo $response['snippet_image_url'];
 
-	echo "<img src = $response[snippet_image_url] >";
-?>
+	echo "<img src = $response[image_url] >";
+	echo "<img src = $response1[image_url] >";
 
+	echo "<img src = $response2[image_url] >";
+	echo "<img src = $response3[image_url] >";
+	echo "<img src = $response4[image_url] >";
+	echo "<img src = $response5[image_url] >";
+	echo "<img src = $response6[image_url] >";
+	echo "<img src = $response7[image_url] >";
+	echo "<img src = $response8[image_url] >";
 
-<?php
-	 //return $response;
     
 //    print sprintf("Result >>>>>>>>>>>>> for business \"%s\" found:\n", $business_id);
 //    print "1 business:<pre>".print_r($response)."</pre>\n";
@@ -163,7 +199,6 @@ $longopts  = array(
 $options = getopt("", $longopts);
 $term = $options['term'] ?: '';
 $location = $options['location'] ?: '';
-
 
 query_api($term, $location);
 ?>
