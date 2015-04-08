@@ -51,7 +51,10 @@
 </div>
 
 <div class = "yelp_picture_display">
-
+	<? php
+		include ('actions/yelp_api_request.php');
+		echo "index this";
+	?>
 </div> 
 
 

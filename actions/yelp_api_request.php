@@ -1,5 +1,22 @@
+<?php
+session_start();
+?><html> 
+
+<head> 
+
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+  
+  <script src = "../Assets/js_yelp.js"></script>
+  </head> 
+  
+  <body>
+
 
 <?php
+
+require_once('dbConn.php');
 /**
  * Yelp API v2.0 code sample.
  *
@@ -50,7 +67,6 @@ if ($input_fromUser == null){
 }else {
 	$DEFAULT_LOCATION = $input_fromUser;
 }
-
 
 
 /** 
@@ -123,19 +139,35 @@ function get_business($business_id) {
  * @param    $location    The location of the business to query
  */
 function query_api($term, $location) {     
-    $response = json_decode(search($term, $location));	
+    $response = json_decode(search($term, $location),true);	
 
-		$business_id = $response->businesses[0]->id; //changing the index on showing business - D
-		$business_id1 = $response->businesses[1]->id;
-		$business_id2 = $response->businesses[2]->id;
-		$business_id3 = $response->businesses[3]->id;
-		$business_id4 = $response->businesses[4]->id;
-		$business_id5 = $response->businesses[5]->id;
-		$business_id6 = $response->businesses[6]->id;
-		$business_id7 = $response->businesses[7]->id;
-		$business_id8 = $response->businesses[8]->id;		
+//	echo '<pre> OM'; print_r($response); echo 'OM </pre>';
+	return $response['businesses'];
+//	echo '<pre> OM'; print_r($response); echo 'OM </pre>';
 
-//       print "businesses:<pre>".print_r($response,true)."</pre>\n";
+/*
+	foreach($response['businesses'] as $index => $business)
+	{
+//		print("<br>################<br>business $index is ".print_r($business,true));
+		echo ("<img src='$business[image_url]'>");
+	}
+	return $response['businesses'];
+ 	exit;
+	$business_id = $response->businesses[0]->id; //changing the index on showing business - D
+*/	
+	
+	
+	/*
+	$business_id1 = $response->businesses[1]->id;
+	$business_id2 = $response->businesses[2]->id;
+	$business_id3 = $response->businesses[3]->id;
+	$business_id4 = $response->businesses[4]->id;
+	$business_id5 = $response->businesses[5]->id;
+	$business_id6 = $response->businesses[6]->id;
+	$business_id7 = $response->businesses[7]->id;
+	$business_id8 = $response->businesses[8]->id;		
+*/
+//  print "businesses:<pre>".print_r($response,true)."</pre>\n";
 /*
     print sprintf(
         "%d businesses found, querying business info for the top result \"%s\"\n\n",         
@@ -143,9 +175,11 @@ function query_api($term, $location) {
         $business_id
     );
 */  
-    $response = get_business($business_id);	
-	$response = json_decode($response, true); //decode JSON once again from business - DL
-
+/*
+    $response0 = get_business($business_id0);
+// response0 is a string;	
+	$response0 = json_decode($response0, true); //decode JSON once again from business - DL
+// response0 is an array;	
 	$response1 = get_business($business_id1);	
 	$response1 = json_decode($response1, true);
 	
@@ -170,20 +204,51 @@ function query_api($term, $location) {
 	$response8 = get_business($business_id8);	
 	$response8 = json_decode($response8, true);	
 	
+	
+	$responseData = [];
+	
+	
 //	var_dump($response);
 //	echo $response['snippet_image_url'];
 
-	echo "<img src = $response[image_url] >";
-	echo "<img src = $response1[image_url] >";
+	echo "<img src = $response0[image_url] data-id = 'response0' >";
+	echo "<img src = $response1[image_url] data-id = 'response1' >";
+	echo "<img src = $response2[image_url] data-id = 'response2' >";
+	echo "<img src = $response3[image_url] data-id = 'response3' >";
+	echo "<img src = $response4[image_url] data-id = 'response4' >";
+	echo "<img src = $response5[image_url] data-id = 'response5' >";
+	echo "<img src = $response6[image_url] data-id = 'response6' >";
+	echo "<img src = $response7[image_url] data-id = 'response7' >";
+	echo "<img src = $response8[image_url] data-id = 'response8' >";
 
-	echo "<img src = $response2[image_url] >";
-	echo "<img src = $response3[image_url] >";
-	echo "<img src = $response4[image_url] >";
-	echo "<img src = $response5[image_url] >";
-	echo "<img src = $response6[image_url] >";
-	echo "<img src = $response7[image_url] >";
-	echo "<img src = $response8[image_url] >";
-
+	
+	$response0 = json_encode($response0);
+	$response1 = json_encode($response1);
+	$response2 = json_encode($response2);
+	$response3 = json_encode($response3);
+	$response4 = json_encode($response4);
+	$response5 = json_encode($response5);
+	$response6 = json_encode($response6);
+	$response7 = json_encode($response7);
+	$response8 = json_encode($response8);
+	
+	
+	$responseData[] = $response0;
+	$responseData[] .=$response1;
+	$responseData[] .=$response2;
+	$responseData[] .=$response3;
+	$responseData[] .=$response4;
+	$responseData[] .=$response5;
+	$responseData[] .=$response6;
+	$responseData[] .=$response7;
+	$responseData[] .=$response8;
+	
+	//$responseData is "Array";	
+	
+	return $responseData;
+*/
+//	var_dump($responseData[8]);
+//	header("Location: ../indexThis.php");
     
 //    print sprintf("Result >>>>>>>>>>>>> for business \"%s\" found:\n", $business_id);
 //    print "1 business:<pre>".print_r($response)."</pre>\n";
@@ -200,5 +265,59 @@ $options = getopt("", $longopts);
 $term = $options['term'] ?: '';
 $location = $options['location'] ?: '';
 
-query_api($term, $location);
+// query_api($term, $location);
+
+// write to db for the query_api: 
+
+// require_once('dbConn.php');
+
+$dbData = query_api($term,$location);
+$_SESSION['retrieved_restaurants']=$dbData;
+
+$_SESSION['response0Address'] = $dbData[0]['location'];
+$r0Address = $_SESSION['response0Address'];
+
+/*
+echo "<pre>";
+print_r($r0Address);
+echo "</pre>";
+*/
+echo "<div class = 'random_pic'>";
+foreach($dbData as $index => $business){
+//		print("<br>################<br>business $index is ".print_r($business,true));
+		
+		echo ("<img src='$business[image_url]' data-index='$index'>");
+	}
+echo "</div>";
+
+
+// print_r($dbData);
+// $response['businesses']['image_url']
+// echo $dbData[0]['image_url'];  // this is good !!!
+
+/*
+// $dbData = json_encode($dbData);
+$zero_element = $dbData[0];
+$zero_element = json_decode($zero_element,true);
+echo '<pre>'; print_r($zero_element['rating_img_url']); echo '</pre>';
+*/
+
+// $temp = $dbData[4]['image_url'];
+// $query = "UPDATE table_pic SET response4= '$temp'";
+
+/*
+$query = "UPDATE table_pic SET response5 = '" . $dbData[5]['image_url'] . "'";
+$result = mysqli_query($CONN, $query);
+
+echo "<br>db updated";
+*/
+	
 ?>
+
+<div class = "display_info">
+
+</div> 
+
+</body> 
+
+</html>
