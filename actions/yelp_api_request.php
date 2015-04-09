@@ -274,9 +274,9 @@ $location = $options['location'] ?: '';
 $dbData = query_api($term,$location);
 $_SESSION['retrieved_restaurants']=$dbData;
 
-$_SESSION['response0Address'] = $dbData[0]['location'];
-$r0Address = $_SESSION['response0Address'];
-
+// $_SESSION['response0info'] = $dbData[0];
+// $r0Address = $_SESSION['response0info'];
+$allInfo = $_SESSION['retrieved_restaurants'];
 /*
 echo "<pre>";
 print_r($r0Address);

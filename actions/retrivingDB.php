@@ -2,34 +2,38 @@
 
 session_start();
 
-	require_once('dbConn.php');
-
-	$r0Address = $_SESSION['response0Address'];
+//	require_once('dbConn.php');
+	$myID = $_POST['id']; 
+	
+	
+	$allInfo = $_SESSION['retrieved_restaurants'];
 	/*
 	echo "<pre>";
-	print_r($r0Address);
+	print_r($allInfo);
 	echo "</pre>";
 	*/
 //	echo json_encode($r0Address);
-	
+
 	
 	
 	$output = [];
 	
-//	$html = $r0Address['city'];
-	$html = $r0Address['display_address'];
-	$output['html'] = $html;
+	$html = []; // null;
 	
+	$html[0] = $allInfo[$myID]['name'];
+	$html[1] = $allInfo[$myID]['location']['display_address'];
+	
+//	$html[3] = $myID;
+	
+//	$html[2] = $r0Address['url'];
+ 
+	
+	$output = $html;
+//	$output['html'] = $html;
 	
 	echo json_encode($output, true);
 
-
-
-
-
 /*
-
-
 
  // modify_view.php: 
  
