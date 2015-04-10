@@ -9,6 +9,10 @@ session_start();
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
   
   <script src = "../Assets/js_yelp.js"></script>
+  
+  <link rel ="stylesheet" href = "../Assets/style_yelp.css">
+  <style> 
+  </style> 
   </head> 
   
   <body>
@@ -59,8 +63,6 @@ echo "$input_fromUser 's $SEARCH_LIMIT restaurant are: <br>";
 
 
 $DEFAULT_TERM = 'dinner';
- //$DEFAULT_LOCATION = 'san diego';
-
 
 if ($input_fromUser == null){
 	$DEFAULT_LOCATION  = 'san diego, ca';
@@ -118,7 +120,6 @@ function search($term, $location) {
     $url_params['location'] = $location?: $GLOBALS['DEFAULT_LOCATION'];
     $url_params['limit'] = $GLOBALS['SEARCH_LIMIT'];
     $search_path = $GLOBALS['SEARCH_PATH'] . "?" . http_build_query($url_params);
-
     return request($GLOBALS['API_HOST'], $search_path);
 }
 
@@ -140,33 +141,20 @@ function get_business($business_id) {
  */
 function query_api($term, $location) {     
     $response = json_decode(search($term, $location),true);	
-
 //	echo '<pre> OM'; print_r($response); echo 'OM </pre>';
 	return $response['businesses'];
-//	echo '<pre> OM'; print_r($response); echo 'OM </pre>';
 
 /*
 	foreach($response['businesses'] as $index => $business)
 	{
-//		print("<br>################<br>business $index is ".print_r($business,true));
+		print("<br>################<br>business $index is ".print_r($business,true));
 		echo ("<img src='$business[image_url]'>");
 	}
 	return $response['businesses'];
  	exit;
 	$business_id = $response->businesses[0]->id; //changing the index on showing business - D
 */	
-	
-	
-	/*
-	$business_id1 = $response->businesses[1]->id;
-	$business_id2 = $response->businesses[2]->id;
-	$business_id3 = $response->businesses[3]->id;
-	$business_id4 = $response->businesses[4]->id;
-	$business_id5 = $response->businesses[5]->id;
-	$business_id6 = $response->businesses[6]->id;
-	$business_id7 = $response->businesses[7]->id;
-	$business_id8 = $response->businesses[8]->id;		
-*/
+
 //  print "businesses:<pre>".print_r($response,true)."</pre>\n";
 /*
     print sprintf(
@@ -179,77 +167,10 @@ function query_api($term, $location) {
     $response0 = get_business($business_id0);
 // response0 is a string;	
 	$response0 = json_decode($response0, true); //decode JSON once again from business - DL
-// response0 is an array;	
-	$response1 = get_business($business_id1);	
-	$response1 = json_decode($response1, true);
-	
-	$response2 = get_business($business_id2);
-	$response2 = json_decode($response2, true);
-	
-	$response3 = get_business($business_id3);	
-	$response3 = json_decode($response3, true);
-	
-	$response4 = get_business($business_id4);
-	$response4 = json_decode($response4, true);
-
-	$response5 = get_business($business_id5);	
-	$response5 = json_decode($response5, true);
-	
-	$response6 = get_business($business_id6);	
-	$response6 = json_decode($response6, true);
-
-	$response7 = get_business($business_id7);	
-	$response7 = json_decode($response7, true);
-	
-	$response8 = get_business($business_id8);	
-	$response8 = json_decode($response8, true);	
-	
-	
-	$responseData = [];
-	
-	
-//	var_dump($response);
-//	echo $response['snippet_image_url'];
-
-	echo "<img src = $response0[image_url] data-id = 'response0' >";
-	echo "<img src = $response1[image_url] data-id = 'response1' >";
-	echo "<img src = $response2[image_url] data-id = 'response2' >";
-	echo "<img src = $response3[image_url] data-id = 'response3' >";
-	echo "<img src = $response4[image_url] data-id = 'response4' >";
-	echo "<img src = $response5[image_url] data-id = 'response5' >";
-	echo "<img src = $response6[image_url] data-id = 'response6' >";
-	echo "<img src = $response7[image_url] data-id = 'response7' >";
-	echo "<img src = $response8[image_url] data-id = 'response8' >";
-
-	
-	$response0 = json_encode($response0);
-	$response1 = json_encode($response1);
-	$response2 = json_encode($response2);
-	$response3 = json_encode($response3);
-	$response4 = json_encode($response4);
-	$response5 = json_encode($response5);
-	$response6 = json_encode($response6);
-	$response7 = json_encode($response7);
-	$response8 = json_encode($response8);
-	
-	
-	$responseData[] = $response0;
-	$responseData[] .=$response1;
-	$responseData[] .=$response2;
-	$responseData[] .=$response3;
-	$responseData[] .=$response4;
-	$responseData[] .=$response5;
-	$responseData[] .=$response6;
-	$responseData[] .=$response7;
-	$responseData[] .=$response8;
-	
+// response0 is an array;		
 	//$responseData is "Array";	
-	
 	return $responseData;
 */
-//	var_dump($responseData[8]);
-//	header("Location: ../indexThis.php");
-    
 //    print sprintf("Result >>>>>>>>>>>>> for business \"%s\" found:\n", $business_id);
 //    print "1 business:<pre>".print_r($response)."</pre>\n";
 }
@@ -268,9 +189,7 @@ $location = $options['location'] ?: '';
 // query_api($term, $location);
 
 // write to db for the query_api: 
-
 // require_once('dbConn.php');
-
 $dbData = query_api($term,$location);
 $_SESSION['retrieved_restaurants']=$dbData;
 
@@ -285,8 +204,9 @@ echo "</pre>";
 echo "<div class = 'random_pic'>";
 foreach($dbData as $index => $business){
 //		print("<br>################<br>business $index is ".print_r($business,true));
-		
+		echo "<div class = 'individual_pic' id = 'ani_$index'>";
 		echo ("<img src='$business[image_url]' data-index='$index'>");
+		echo "</div>";
 	}
 echo "</div>";
 

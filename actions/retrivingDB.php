@@ -4,8 +4,7 @@ session_start();
 
 //	require_once('dbConn.php');
 	$myID = $_POST['id']; 
-	
-	
+
 	$allInfo = $_SESSION['retrieved_restaurants'];
 	/*
 	echo "<pre>";
@@ -13,24 +12,17 @@ session_start();
 	echo "</pre>";
 	*/
 //	echo json_encode($r0Address);
-
-	
-	
 	$output = [];
 	
 	$html = []; // null;
 	
 	$html[0] = $allInfo[$myID]['name'];
 	$html[1] = $allInfo[$myID]['location']['display_address'];
-	
-//	$html[3] = $myID;
-	
+	$html[3] = $allInfo[$myID]['url'];
 //	$html[2] = $r0Address['url'];
- 
 	
 	$output = $html;
 //	$output['html'] = $html;
-	
 	echo json_encode($output, true);
 
 /*

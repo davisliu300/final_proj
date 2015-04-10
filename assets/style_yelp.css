@@ -1,3 +1,71 @@
+.center-block{
+/*	margin: 0 auto;*/
+	left: 50%;
+	top: 50%;
+	width: 70vw;
+	transform: translate(-50%,-50%);
+	position: absolute;
+}
+
+
 .yelp_picture_display{
 	
 }
+
+.random_pic{
+	width: 460px; /*45vw*/
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	
+	-webkit-transform: translate(-50%, -50%);
+	 /*  background: #FFFFE0;light yellow color */
+	padding: 20px;
+}
+
+
+
+
+.individual_pic{
+	padding: 20px;
+	display: inline-block;
+	background: #FFFFE0;
+	-webkit-transition: all 1.3s ease-in-out;
+}
+
+
+
+#ani_0:hover{
+	-webkit-transform: translate(100%,100%) scale(3);
+}
+
+#ani_1:hover{
+	-webkit-transform: translateY(100%) scale(3) ;
+}
+#ani_2:hover{
+	-webkit-transform: translate(-100%, 100%) scale(3) ;
+}
+#ani_3:hover{
+	-webkit-transform: translateX(100%) scale(3);
+}
+#ani_4:hover{
+	-webkit-transform:  scale(3);
+}
+#ani_5:hover{
+	-webkit-transform: translateX(-100%) scale(3) ;
+}
+#ani_6:hover{
+	-webkit-transform: translate(100%, -100%) scale(3) ;
+}
+#ani_7:hover{
+	-webkit-transform: translateY(-100%) scale(3) ;
+}
+#ani_8:hover{
+	-webkit-transform: translate(-100%, -100%) scale(3) ;
+}
+
+
+.restaurantName{
+	font-size: 30px;
+}
+
