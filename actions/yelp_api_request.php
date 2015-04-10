@@ -207,7 +207,7 @@ foreach($dbData as $index => $business){
 
 // <a data-toggle = "modal" data-target ="#myModal"> ok to click?</a>
 		echo "<div class = 'individual_pic' id = 'ani_$index'> ";
-		echo ("<a data-toggle = 'modal' data-target = '#myModal'> <img src='$business[image_url]' data-index='$index'> </a>");
+		echo ("<a data-toggle = 'modal' data-target = '#restaurant_modal'> <img src='$business[image_url]' data-index='$index'> </a>");
 		echo "</div>";
 	}
 echo "</div>";
@@ -236,11 +236,26 @@ echo "<br>db updated";
 	
 ?>
 
-<div class = "display_info">
+
+<div class="modal fade" id="restaurant_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+      </div>
+      <div class="modal-body">
+		<div class = "display_info">
 
 
-</div> 
-
+		</div> 
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 </body> 
 
