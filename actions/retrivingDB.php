@@ -18,7 +18,9 @@ session_start();
 	
 	$html[0] = $allInfo[$myID]['name'];
 	$html[1] = $allInfo[$myID]['location']['display_address'];
+	$html[2] = $allInfo[$myID]['display_phone'];
 	$html[3] = $allInfo[$myID]['url'];
+	$html[6] = $allInfo[$myID]['location']['coordinate'];
 //	$html[2] = $r0Address['url'];
 	
 	$output = $html;

@@ -59,7 +59,7 @@ $input_fromUser = null;
 require_once ('input_temp.php');
 
 // echo "i am here after reqired once ";
-echo "$input_fromUser 's $SEARCH_LIMIT restaurant are: <br>";
+// echo "$input_fromUser 's $SEARCH_LIMIT restaurant are: <br>";
 
 
 $DEFAULT_TERM = 'dinner';
@@ -204,8 +204,10 @@ echo "</pre>";
 echo "<div class = 'random_pic'>";
 foreach($dbData as $index => $business){
 //		print("<br>################<br>business $index is ".print_r($business,true));
-		echo "<div class = 'individual_pic' id = 'ani_$index'>";
-		echo ("<img src='$business[image_url]' data-index='$index'>");
+
+// <a data-toggle = "modal" data-target ="#myModal"> ok to click?</a>
+		echo "<div class = 'individual_pic' id = 'ani_$index'> ";
+		echo ("<a data-toggle = 'modal' data-target = '#myModal'> <img src='$business[image_url]' data-index='$index'> </a>");
 		echo "</div>";
 	}
 echo "</div>";
@@ -236,7 +238,9 @@ echo "<br>db updated";
 
 <div class = "display_info">
 
+
 </div> 
+
 
 </body> 
 

@@ -7,6 +7,12 @@
 	position: absolute;
 }
 
+.restAddressFont{
+	font-weight: 700;
+}
+.google_coords{
+	font-weight: 500;
+}
 
 .yelp_picture_display{
 	
@@ -37,31 +43,40 @@
 
 #ani_0:hover{
 	-webkit-transform: translate(100%,100%) scale(3);
+	opacity: 0.96;
 }
 
 #ani_1:hover{
 	-webkit-transform: translateY(100%) scale(3) ;
+	opacity: 0.96;
 }
 #ani_2:hover{
 	-webkit-transform: translate(-100%, 100%) scale(3) ;
+	opacity: 0.96;
 }
 #ani_3:hover{
 	-webkit-transform: translateX(100%) scale(3);
+	opacity: 0.96;
 }
 #ani_4:hover{
 	-webkit-transform:  scale(3);
+	opacity: 0.96;
 }
 #ani_5:hover{
 	-webkit-transform: translateX(-100%) scale(3) ;
+	opacity: 0.96;
 }
 #ani_6:hover{
 	-webkit-transform: translate(100%, -100%) scale(3) ;
+	opacity: 0.96;
 }
 #ani_7:hover{
 	-webkit-transform: translateY(-100%) scale(3) ;
+	opacity: 0.96;
 }
 #ani_8:hover{
 	-webkit-transform: translate(-100%, -100%) scale(3) ;
+	opacity: 0.96;
 }
 
 
