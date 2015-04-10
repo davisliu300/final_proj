@@ -24,7 +24,11 @@ $(document).ready(function (){
 		//*** restaurantAddress is inserted as in modal body - chains 
 		var modalBody_chain2 = '</span> </p> <p> Google Coords are: <span class = "google_coords"> ';
 		//*** restaurantGoogle_coord is insert here;
-		var modalBody_chainEnd= '</span></p></div>';
+		
+		var modalBody_chain3 = '</span> </p> <p> Yelp\'s Link for the shop is here: <a href = "';
+		//*** restaurantLink is insert here;
+		var modalBody_chain4 = '">Yelp</a>';
+		var modalBody_chainEnd= '</p></div>';
 		var modalFooter = '<div class="modal-footer">';
 		modalFooter += '<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>';
 		modalFooter += '</div></div><!-- /.modal-content --></div><!-- /.modal-dialog --></div>';
@@ -32,25 +36,7 @@ $(document).ready(function (){
 
 		// insert 
 
-		
-		
-/*
-	$html[0] = $allInfo[$myID]['name'];
-	$html[1] = $allInfo[$myID]['location']['display_address'];
-	$html[2] = $allInfo[$myID]['display_phone'];
-	$html[3] = $allInfo[$myID]['url'];
 	
-	$html[6] = $allInfo[$myID]['location']['coordinate'];
-
-*/
-		
-		
-		
-		
-		
-		
-		
-
 		$.ajax({
 			url : 'retrivingDB.php', 
 //			url : 'https://www.yelp.com',
@@ -73,14 +59,12 @@ $(document).ready(function (){
 				var and = ", ";
 				restaurantGoogle_coord += and + thisData[6]['longitude'];
 				
+				var restaurantLink = thisData[3];
 				console.log("rest goole is: ", restaurantGoogle_coord);
-				$('.display_info').html(modalTitle + restaurantName + modalBody + restaurantPhone + modalBody_chain1 + restaurantAddress+ modalBody_chain2 + restaurantGoogle_coord+ modalBody_chainEnd+modalFooter);
-//modalTitle + [restName] + modalBody + [restPhone] + modalBody_Chain1 + [restaddress] + modalBody_chain2 + restaurantGoogle_coord+ modalBody_chainEnd + modalFooter;			
-//				$('.display_info').html(thisTag + thisData[0] + thatTag);
-//				$('.display_info').html(response); // working with TEXT !
-				
-//				$('body').html(modalTitle + thisData[0] + modalBody); // won't work within a div.
-				
+				$('.display_info').html(modalTitle + restaurantName + modalBody + restaurantPhone + modalBody_chain1 + restaurantAddress+ modalBody_chain2 + restaurantGoogle_coord+ modalBody_chain3 + restaurantLink + modalBody_chain4+ modalBody_chainEnd+modalFooter);
+//modalTitle + [restName] + modalBody + [restPhone] + modalBody_Chain1 + [restaddress] + modalBody_chain2 + restaurantGoogle_coord+ modalBody_chain3 + [restLink]+ modalBody_chainEnd + modalFooter;	
+		
+//				$('.display_info').html(thisTag + thisData[0] + thatTag);			
 //				$('.display_info').text("ok");
 			},
 			error: function(response){
@@ -88,6 +72,9 @@ $(document).ready(function (){
 			}
 		});
 	});
+	$('#myModal').modal('hide');
+	$('body').removeClass('modal-open');
+	$('.modal-backdrop').remove();
 });
 
 
