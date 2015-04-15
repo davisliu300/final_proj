@@ -26,7 +26,7 @@
 <div class = "center-block "> 
 
 <div>
-<form action = "actions/yelp_api_request.php" method = "post">
+<form action = "./actions/yelp_api_request.php" method = "post">
 
   <div class="form-group">
     <label for="inputText" class="col-sm-2 control-label"></label>
